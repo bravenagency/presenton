@@ -91,16 +91,18 @@ export default function LLMProviderSelection({
   };
 
   useEffect(() => {
+    const presentonServer = process.env.NEXT_PUBLIC_PRESENTON_SERVER || 'localhost';
     if (!llmConfig.USE_CUSTOM_URL) {
-      setLlmConfig({ ...llmConfig, OLLAMA_URL: "http://localhost:11434" });
+      setLlmConfig({ ...llmConfig, OLLAMA_URL: `http://${presentonServer}:11434` });
     } else {
       if (!llmConfig.OLLAMA_URL) {
-        setLlmConfig({ ...llmConfig, OLLAMA_URL: "http://localhost:11434" });
+        setLlmConfig({ ...llmConfig, OLLAMA_URL: `http://${presentonServer}:11434` });
       }
     }
   }, [llmConfig.USE_CUSTOM_URL]);
 
   useEffect(() => {
+    const presentonServer = process.env.NEXT_PUBLIC_PRESENTON_SERVER || 'localhost';
     let updates: any = {};
     if (!llmConfig.IMAGE_PROVIDER) {
       if (llmConfig.LLM === "openai") {
@@ -112,7 +114,7 @@ export default function LLMProviderSelection({
       }
     }
     if (!llmConfig.OLLAMA_URL) {
-      updates.OLLAMA_URL = "http://localhost:11434";
+      updates.OLLAMA_URL = `http://${presentonServer}:11434`;
     }
     setLlmConfig({ ...llmConfig, ...updates });
   }, []);

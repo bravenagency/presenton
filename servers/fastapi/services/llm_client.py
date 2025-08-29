@@ -49,6 +49,7 @@ from utils.get_env import (
     get_google_api_key_env,
     get_ollama_url_env,
     get_openai_api_key_env,
+    get_presenton_server_env,
     get_tool_calls_env,
     get_web_grounding_env,
 )
@@ -131,7 +132,7 @@ class LLMClient:
 
     def _get_ollama_client(self):
         return AsyncOpenAI(
-            base_url=(get_ollama_url_env() or "http://localhost:11434") + "/v1",
+            base_url=(get_ollama_url_env() or f"http://{get_presenton_server_env()}:11434") + "/v1",
             api_key="ollama",
         )
 

@@ -6,10 +6,11 @@ const nextConfig = {
 
   // Rewrites for development - proxy font requests to FastAPI backend
   async rewrites() {
+    const presentonServer = process.env.PRESENTON_SERVER || 'localhost';
     return [
       {
         source: '/app_data/fonts/:path*',
-        destination: 'http://localhost:8000/app_data/fonts/:path*',
+        destination: `http://${presentonServer}:8000/app_data/fonts/:path*`,
       },
     ];
   },
